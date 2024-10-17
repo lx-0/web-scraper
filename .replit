@@ -1,17 +1,15 @@
 entrypoint = "src/server.ts"
-
 modules = ["nodejs-20", "nix"]
 hidden = [".config", "package-lock.json", "tsconfig.json"]
 run = "npm run dev"
 
 [nix]
-channel = "stable-24_05"
+channel = "stable-22_11"
 
-[gitHubImport]
-requiredFiles = [".replit", "replit.nix", "package.json", "package-lock.json"]
-
-[unitTest]
-language = "nodejs"
+[env]
+XDG_CONFIG_HOME = "$REPL_HOME/.config"
+PATH = "$REPL_HOME/.config/npm/node_global/bin:$REPL_HOME/node_modules/.bin"
+npm_config_prefix = "$REPL_HOME/.config/npm/node_global"
 
 [packager]
 language = "nodejs"
@@ -23,23 +21,16 @@ enabledForHosting = false
 
 [languages]
 
-[languages.javascript]
-pattern = "**/{*.js,*.jsx,*.ts,*.tsx,*.json,*.prettierrc}"
+[languages.typescript]
+pattern = "**/{*.ts,*.js,*.tsx,*.jsx,*.json,*.prettierrc}"
 
-[languages.javascript.languageServer]
+[languages.typescript.languageServer]
 start = "typescript-language-server --stdio"
 
 [deployment]
-deploymentTarget = "cloudrun" # gce,cloudrun
-ignorePorts = false
-# build = ["sh", "-c", "npm run build"]
 run = ["sh", "-c", "npm run start"]
+deploymentTarget = "cloudrun"
 
 [[ports]]
 localPort = 3000
 externalPort = 80
-exposeLocalhost = true
-
-# Debugging
-[debugger]
-support = true
