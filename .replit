@@ -1,0 +1,45 @@
+entrypoint = "src/server.ts"
+
+modules = ["nodejs-20", "nix"]
+hidden = [".config", "package-lock.json", "tsconfig.json"]
+run = "npm run dev"
+
+[nix]
+channel = "stable-24_05"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", "package.json", "package-lock.json"]
+
+[unitTest]
+language = "nodejs"
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+enabledForHosting = false
+
+[languages]
+
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx,*.json,*.prettierrc}"
+
+[languages.javascript.languageServer]
+start = "typescript-language-server --stdio"
+
+[deployment]
+deploymentTarget = "cloudrun" # gce,cloudrun
+ignorePorts = false
+# build = ["sh", "-c", "npm run build"]
+run = ["sh", "-c", "npm run start"]
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+exposeLocalhost = true
+
+# Debugging
+[debugger]
+support = true

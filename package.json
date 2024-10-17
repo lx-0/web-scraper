@@ -1,0 +1,49 @@
+{
+  "name": "web-scraper",
+  "version": "1.0.0",
+  "description": "Playwright based web scraper",
+  "keywords": [
+    "playwright",
+    "web scraper",
+    "scraper"
+  ],
+  "author": "Alex Wegener, lx-0",
+  "license": "ISC",
+  "main": "src/server.ts",
+  "scripts": {
+    "dev": "npm run serve-watch",
+    "build": "",
+    "start": "npm run serve",
+    "debug": "npm run serve-debug-node",
+    "serve": "tsx src/server.ts",
+    "serve-watch": "tsx watch src/server.ts",
+    "serve-debug-tsx": "tsx --inspect-brk src/server.ts",
+    "serve-debug-node": "node --import tsx --inspect src/server.ts",
+    "reset": "rm -rf node_modules && npm ci",
+    "reset:full": "rm -rf node_modules && rm package-lock.json && npm cache clean --force && npm i",
+    "postinstall": "patch-package",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "@fastify/formbody": "^8.0.0",
+    "@fastify/websocket": "^11.0.0",
+    "axios": "^1.7.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^5.0.0",
+    "lodash-es": "^4.17.21",
+    "typeorm": "^0.3.20",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^20.10.0",
+    "@types/ws": "^8.5.12",
+    "import-sort-style-module": "^6.0.0",
+    "patch-package": "^8.0.0",
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.1",
+    "typescript": "~5.1.6"
+  }
+}
